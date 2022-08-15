@@ -17,11 +17,12 @@ paths:
       requestBody:
         description: ''
         content:
-          text/plain:
+          application/json:
             schema:
               type: string
-              example: "{\r\n    \"name\": \"David\",  \"email\": \"David@gmail.com\",  \"password\": \"Okunbo1999.\" \r\n}\r\n}\r\n}"
-            example: "{\r\n    \"name\": \"David\",  \"email\": \"David@gmail.com\",  \"password\": \"Okunbo1999.\" \r\n}\r\n}\r\n}"
+            example:
+              email: invtcrypt22@gmail.com
+              password: Okrenbo879
         required: true
       responses:
         '200':
@@ -43,8 +44,8 @@ paths:
             schema:
               $ref: '#/components/schemas/LoginUserRequest'
             example:
-              email: investcrypt22@gmail.com
-              password: Okunbo1999
+              email: invtcrypt22@gmail.com
+              password: Okrenbo879
         required: true
       responses:
         '200':
@@ -72,11 +73,19 @@ paths:
       summary: Create Jobs
       operationId: CreateJobs
       parameters: []
+      requestBody:
+          content:
+           application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateJobRequest'
+            example:
+              status: pending
       responses:
         '200':
           description: ''
-          headers: {}
       deprecated: false
+      security:
+      - bearer: []
   /jobs/{id}:
     parameters:
       - in: path
@@ -111,7 +120,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateJobRequest'
             example:
-              status: pendig
+              status: pending
         required: true
       responses:
         '200':
@@ -155,10 +164,16 @@ components:
       - status
       type: object
       properties:
+        company:
+          type: string
+        position:
+          type: string
         status:
           type: string
       example:
-        status: pendig
+        company: facebook
+        position: ceo
+        status: pending
   securitySchemes:
     bearer:
       type: http
